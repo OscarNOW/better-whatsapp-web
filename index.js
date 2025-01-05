@@ -41,6 +41,8 @@ function whatsappLoaded() {
     wrapper.style.width = '100%';
     wrapper.style.height = '100%';
 
+    let styleTexts = [];
+
     if (document.body.classList.contains('dark')) {
         let styleInnerText = `
         span[data-icon]:is($$) {
@@ -54,10 +56,31 @@ function whatsappLoaded() {
 
         const iconText = iconTexts.join(',');
         styleInnerText = styleInnerText.replace('$$', iconText);
-        styleInnerText = styleInnerText.replaceAll('\n', '');
 
-        const style = document.createElement('style');
-        style.innerText = styleInnerText;
-        document.head.appendChild(style);
+        styleTexts.push(styleInnerText);
     }
+
+    styleTexts.push(`
+    #app > div > div > div > div > span > div > span > div > div > section > div:has(span[data-icon="lock"]) {
+        display: none !important;
+    }
+    `);
+
+    styleTexts.push(`
+    #app > div > div > div > div > div > span > div > span > div > div > div > div > div > div > div > span > div:has(span[data-icon="lock-small-v2"]) {
+        display: none !important;
+    }
+    `);
+
+    styleTexts.push(`
+    #app > div > div > div > header > div > div > div > div > span > div > div > div:has(span[data-icon="newsletter-outline"]) {
+        display: none !important;
+    }
+    `);
+
+    styleTexts = styleTexts.map(a => a.split('\n').map(b => b.trim()).join(''));
+    const styleText = styleTexts.join('\n');
+    const style = document.createElement('style');
+    style.textContent = styleText;
+    document.head.appendChild(style);
 }
