@@ -100,6 +100,13 @@ function whatsappLoaded() {
     }
     `);
 
+    //disabled call button
+    styleTexts.push(`
+    #main > header > div > div > div:has(span[data-icon="video-call"]) {
+        ${debug ? 'background-color: red;' : 'display: none;'}
+    }
+    `);
+
     styleTexts = styleTexts.map(a => a.split('\n').map(b => b.trim()).join(''));
     const styleText = styleTexts.join('\n');
     const style = document.createElement('style');
