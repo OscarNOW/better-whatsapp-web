@@ -42,6 +42,7 @@ function whatsappLoaded() {
     wrapper.style.height = '100%';
 
     let styleTexts = [];
+    styleTexts.push('/* Better whatsapp web extension */');
 
     if (document.body.classList.contains('dark')) {
         let styleInnerText = `
@@ -60,20 +61,30 @@ function whatsappLoaded() {
         styleTexts.push(styleInnerText);
     }
 
+    //end to end encryption
     styleTexts.push(`
     #app > div > div > div > div > span > div > span > div > div > section > div:has(span[data-icon="lock"]) {
         display: none !important;
     }
     `);
 
+    //end to end encryption
     styleTexts.push(`
     #app > div > div > div > div > div > span > div > span > div > div > div > div > div > div > div > span > div:has(span[data-icon="lock-small-v2"]) {
         display: none !important;
     }
     `);
 
+    //newsletter
     styleTexts.push(`
     #app > div > div > div > header > div > div > div > div > span > div > div > div:has(span[data-icon="newsletter-outline"]) {
+        display: none !important;
+    }
+    `);
+
+    //download from microsoft store
+    styleTexts.push(`
+    #app > div > div > div > div > div > div:has(div[gap]) {
         display: none !important;
     }
     `);
