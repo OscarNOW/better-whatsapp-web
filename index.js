@@ -89,6 +89,16 @@ function whatsappLoaded() {
     }
     `);
 
+    //download from microsoft store
+    styleTexts.push(`
+    #app > div > span > div > ul > div > hr {
+        display: none !important;
+    }
+    #app > div > span > div > ul > div > li:last-child {
+        display: none !important;
+    }
+    `);
+
     styleTexts = styleTexts.map(a => a.split('\n').map(b => b.trim()).join(''));
     const styleText = styleTexts.join('\n');
     const style = document.createElement('style');
