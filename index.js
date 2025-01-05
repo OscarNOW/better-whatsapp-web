@@ -1,9 +1,25 @@
 const wrapperSelector = '#app > div > div > div.two';
+const whiteIcons = [
+    'chats-filled',
+    'chats-outline',
+    'status',
+    'status-outline',
+    'newsletter-tab',
+    'newsletter-outline',
+    'community-tab',
+    'community-outline',
+    'settings',
+    'settings-outline',
+    'new-chat-outline',
+    'menu',
+    'search-alt',
+    'plus'
+];
 
 const html = document.documentElement;
 
-const mutationObserver = new MutationObserver(htmlUpdate);
-mutationObserver.observe(html, { attributes: true, childList: false, subtree: false });
+const htmlObserver = new MutationObserver(htmlUpdate);
+htmlObserver.observe(html, { attributes: true, childList: false, subtree: false });
 
 console.log('better whatsapp web waiting for whatsapp to load');
 
@@ -25,15 +41,23 @@ function whatsappLoaded() {
     wrapper.style.width = '100%';
     wrapper.style.height = '100%';
 
-    updateIcons();
-}
-
-function updateIcons() {
     if (document.body.classList.contains('dark')) {
-        const icons = document.querySelectorAll('span[data-icon]');
-        for (const icon of [...icons]) {
-            if (!icon.style.color || icon.style.color !== 'white')
-                icon.style.color = 'white';
+        let styleInnerText = `
+        span[data-icon]:is($$) {
+            color: white !important;
         }
+        `;
+
+        let iconTexts = [''];
+        for (const whiteIcon of whiteIcons)
+            iconTexts.push(`[data-icon="${whiteIcon}"]`);
+
+        const iconText = iconTexts.join(',');
+        styleInnerText = styleInnerText.replace('$$', iconText);
+        styleInnerText = styleInnerText.replaceAll('\n', '');
+
+        const style = document.createElement('style');
+        style.innerText = styleInnerText;
+        document.head.appendChild(style);
     }
 }
