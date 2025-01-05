@@ -15,6 +15,7 @@ const whiteIcons = [
     'search-alt',
     'plus'
 ];
+const debug = false;
 
 const html = document.documentElement;
 
@@ -64,38 +65,38 @@ function whatsappLoaded() {
     //end to end encryption
     styleTexts.push(`
     #app > div > div > div > div > span > div > span > div > div > section > div:has(span[data-icon="lock"]) {
-        display: none !important;
+        ${debug ? 'background-color: green;' : 'display: none;'}
     }
     `);
 
     //end to end encryption
     styleTexts.push(`
     #app > div > div > div > div > div > span > div > span > div > div > div > div > div > div > div > span > div:has(span[data-icon="lock-small-v2"]) {
-        display: none !important;
+        ${debug ? 'background-color: purple;' : 'display: none;'}
     }
     `);
 
     //newsletter
     styleTexts.push(`
     #app > div > div > div > header > div > div > div > div > span > div > div > div:has(span[data-icon="newsletter-outline"]) {
-        display: none !important;
+        ${debug ? 'background-color: yellow;' : 'display: none;'}
     }
     `);
 
     //download from microsoft store
     styleTexts.push(`
     #app > div > div > div > div > div > div:has(div[gap]) {
-        display: none !important;
+        ${debug ? 'background-color: blue;' : 'display: none;'}
     }
     `);
 
     //download from microsoft store
     styleTexts.push(`
     #app > div > span > div > ul > div > hr {
-        display: none !important;
+        ${debug ? 'background-color: brown;' : 'display: none;'}
     }
-    #app > div > span > div > ul > div > li:last-child {
-        display: none !important;
+    #app > div > span > div > ul > div > hr + li:last-child {
+        ${debug ? 'background-color: teal;' : 'display: none;'}
     }
     `);
 
